@@ -11,6 +11,12 @@ import java.util.Arrays;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Class to grab json array of users from:
+ * https://jsonplaceholder.typicode.com/users
+ * and turn response into an array of objects
+ */
+
 @Getter
 @Slf4j
 class Fetcher {
