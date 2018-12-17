@@ -19,8 +19,13 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Slf4j
-public class Fetcher extends AsyncTask<String,String,User[]> {
+public class Fetcher extends AsyncTask<Void, Void, User[]> {
    static User[] users = new User[0];
+   private FetcherResponse delegate;
+
+    public Fetcher(FetcherResponse delegate){
+        this.delegate = delegate;
+    }
 
     static void fetchUsers() {
         log.debug("fetchUsers() called");
@@ -72,9 +77,17 @@ public class Fetcher extends AsyncTask<String,String,User[]> {
     }
 
     @Override
-    protected User[] doInBackground(String ... voids) {
+    protected User[] doInBackground(Void ... voids) {
         fetchUsers();
-        users.notify();
         return users;
+    }
+
+    @Override
+    protected void onPostExecute(User[] result) {
+        delegate.processFinish(result);
+    }
+
+    public interface FetcherResponse {
+        void processFinish(User[] newUserList);
     }
 }

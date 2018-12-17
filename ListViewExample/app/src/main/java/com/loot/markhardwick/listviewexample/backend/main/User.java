@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -20,25 +21,28 @@ public class User {
     Address address;
     Company company;
 
+    @ToString
     @Setter @Getter
     @AllArgsConstructor
     @NoArgsConstructor
-    class Address {
+    public class Address {
         String street, suite, city, zipcode;
         Geo geo;
 
+        @ToString
         @Setter @Getter
         @AllArgsConstructor
         @NoArgsConstructor
-        class Geo {
+        public class Geo {
             String lat, lng;
         }
     }
 
+    @ToString
     @Setter @Getter
     @AllArgsConstructor
     @NoArgsConstructor
-    class Company {
+    public class Company {
         String name, catchPhrase, bs;
     }
 }
