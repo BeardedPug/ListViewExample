@@ -1,5 +1,7 @@
 package com.loot.markhardwick.listviewexample.backend.main;
 
+import android.os.AsyncTask;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -8,7 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -17,10 +18,9 @@ import lombok.extern.slf4j.Slf4j;
  * and turn response into an array of objects
  */
 
-@Getter
 @Slf4j
-class Fetcher {
-   static User[] users = null;
+public class Fetcher extends AsyncTask<String,String,User[]> {
+   static User[] users = new User[0];
 
     static void fetchUsers() {
         log.debug("fetchUsers() called");
@@ -65,5 +65,16 @@ class Fetcher {
             x = x / 10;
         }
         return x;
+    }
+
+    public static User[] getUsers(){
+        return users;
+    }
+
+    @Override
+    protected User[] doInBackground(String ... voids) {
+        fetchUsers();
+        users.notify();
+        return users;
     }
 }

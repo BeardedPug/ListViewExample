@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
-class User {
+public class User {
     int id;
     String name, username, email, phone, website;
     Address address;
