@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -31,12 +30,14 @@ public class MainActivity extends Activity {
         adapter = new ListAdapter(this, Fetcher.getUsers());
         listView.setAdapter(adapter);
 
+        /* Not needed for task will flesh out later
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               //TODO
+
             }
         });
+        */
 
         Fetcher fetcher = new Fetcher(new Fetcher.FetcherResponse() {
             @Override
@@ -58,7 +59,7 @@ public class MainActivity extends Activity {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
-        public void updateUsers(User[] newUsers){
+        void updateUsers(User[] newUsers){
             users = newUsers;
             this.notifyDataSetChanged();
         }
