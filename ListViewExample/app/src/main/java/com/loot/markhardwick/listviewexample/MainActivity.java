@@ -83,13 +83,15 @@ public class MainActivity extends Activity {
         public View getView(int position, View convertView, ViewGroup parent) {
             View toReturn = convertView;
             if(toReturn == null){
-                toReturn = inflater.inflate(R.layout.row, null);
+                toReturn = inflater.inflate(R.layout.row_just_name, null);
             }
             User user = users[position];
+            TextView nameField = toReturn.findViewById(R.id.name);
+            nameField.setText(String.format("%s", user.getName()));
+
+            /* Reread task was only for name and surname
             TextView idField = toReturn.findViewById(R.id.idNumber);
             idField.setText(String.format("%s%d", getString(R.string.id), user.getId()));
-            TextView nameField = toReturn.findViewById(R.id.name);
-            nameField.setText(String.format("%s%s", getString(R.string.name), user.getName()));
             TextView usernameField = toReturn.findViewById(R.id.username);
             usernameField.setText(String.format("%s%s", getString(R.string.username), user.getUsername()));
             TextView emailField = toReturn.findViewById(R.id.email);
@@ -102,6 +104,7 @@ public class MainActivity extends Activity {
             websiteField.setText(String.format("%s%s", getString(R.string.website), user.getWebsite()));
             TextView companyField = toReturn.findViewById(R.id.company);
             companyField.setText(String.format("%s%s", getString(R.string.company), user.getCompany().toString()));
+            */
             return toReturn;
         }
     }
